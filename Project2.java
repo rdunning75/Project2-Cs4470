@@ -13,7 +13,7 @@ public class Project2 {
     public static Timer timer = new Timer();
     public static int numberofpacketsRecieved = 0;
 
-    public static int NUMOFSERVER = 4;
+    public static int NUMOFSERVER = 2;
     public static int SERVERID = 1;
     //    public static int SERVERID = 2;
 //    public static int SERVERID = 3;
