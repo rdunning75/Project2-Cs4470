@@ -1,0 +1,35 @@
+CS4470
+Project #1, Chat Application 
+
+These shell commands are defined internally. Type `help' to see this list.
+
+/help
+	- Display the command manual or user interface options
+ 
+/myip
+	- Show the IP address of the laptop that runs the program
+
+/myport
+	- Display the port # that the program is running on
+
+/connect <destination> <port no>
+	- Establish TCP connection to destination with specified port
+	- Both peers are notified of successful and failed connections using suitable messages
+
+/list
+	- List all the connected peers
+	- Output contains IP address and listening port of all peers currently connected to
+ 
+/terminate <connection id>
+	- Terminate a connection
+	- Both peers are notified of terminated connections
+
+/send <connection id> <message>
+	- Message sent to peer using connection id
+	- Peer receives a message notification with the sender IP
+
+ /exit
+	- Quit program
+	- Terminate all connections
+	- All peers notified of terminated connections
+	
