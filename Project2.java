@@ -72,7 +72,7 @@ public class Project2 {
         // begin adding topology file data to topology object
 
         server.addToServerIDs(NUMOFSERVER);
-        for (int i = 2; i < 6; i++) {
+        for (int i = 2; i < NUMOFSERVER+2; i++) {
             String[] topologyData = filedata.get(i).split(" ");
             server.addToIpPortMap(topologyData[1], topologyData[2], i - 1, false);
 
@@ -80,7 +80,7 @@ public class Project2 {
 
 
 
-        for (int i = 6; i < 9; i++) {
+        for (int i = NUMOFSERVER+2; i < (NUMOFSERVER*2)+3; i++) {
             String[] costData = filedata.get(i).split(" ");
             server.addCosts(Integer.parseInt(costData[0]), Integer.parseInt(costData[1]), costData[2]);
         }
