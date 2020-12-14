@@ -80,7 +80,7 @@ public class Project2 {
 
 
 
-        for (int i = NUMOFSERVER+2; i < (NUMOFSERVER*2)+3; i++) {
+        for (int i = NUMOFSERVER+2; i < (NUMOFSERVER*2)+1; i++) {
             String[] costData = filedata.get(i).split(" ");
             server.addCosts(Integer.parseInt(costData[0]), Integer.parseInt(costData[1]), costData[2]);
         }
