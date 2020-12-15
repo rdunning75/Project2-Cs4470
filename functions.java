@@ -199,16 +199,16 @@ public class functions {
         ArrayList<IpPortMap> neighborIpAndPorts = server.getIpsAndPorts();
 
 
+        for(IpPortMap ipPortMap : neighborIpAndPorts){
+            ipPortMap.print();
+        }
+
         for (Peer peer : peerList) {
-
             String peerListInetIp = peer.socket.getInetAddress().toString();
-
-            for (int j = 0; j < neighborIpAndPorts.size(); j++) {
-
-                IpPortMap neighbor = neighborIpAndPorts.get(j);
-
-                if (peerListInetIp.equals(neighbor.getIp())) {
-                    int neighborId = neighbor.getServerId();
+            for (IpPortMap ipPortMap : neighborIpAndPorts) {
+                System.out.println(peerListInetIp + " " + ipPortMap.getIp() +" ");
+                if (peerListInetIp.equals(ipPortMap.getIp().replace("/",""))) {
+                    int neighborId = ipPortMap.getServerId();
                     CostMap currentCostMap = server.getCostMapByServerID2(neighborId);
                     String message = "step";
                     message = message + " " + currentCostMap.cost;
