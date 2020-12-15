@@ -27,7 +27,6 @@ public class functions {
             peerList.add(peer);
 
             // Print new messages, continue checking status of remote peer
-            peer.printMessage();
             String message = peer.readMessage();
             String[] messageTokens = message.split(" ");
             String function = messageTokens[0];
