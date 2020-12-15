@@ -27,10 +27,12 @@ public class functions {
             peerList.add(peer);
 
             // Print new messages, continue checking status of remote peer
+
             String message = peer.readMessage();
             String[] messageTokens = message.split(" ");
             String function = messageTokens[0];
             System.out.println("Function called by message : " + function + "_");
+
             if (function.equals("update")) {
             } else if (function.equals("step")) {
                 ArrayList<CostMap> costs = Project2.server.getCosts();
@@ -53,7 +55,7 @@ public class functions {
             // Reopen socket for new connection
             s_socket.close();
             ss_socket.close();
-            // terminate(peer.getId());
+            terminate(peer.getId());
             listening(port);
         } catch (IOException e) {
 
