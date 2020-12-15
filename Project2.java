@@ -14,8 +14,8 @@ public class Project2 {
     public static int numberofpacketsRecieved = 0;
 
     public static int NUMOFSERVER = 2;
-    public static int SERVERID = 1;
-    //    public static int SERVERID = 2;
+//    public static int SERVERID = 1;
+        public static int SERVERID = 2;
 //    public static int SERVERID = 3;
 //    public static int SERVERID = 4;
     public static Topology server = new Topology(SERVERID, NUMOFSERVER);
