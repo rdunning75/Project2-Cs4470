@@ -27,23 +27,22 @@ public class functions {
             peerList.add(peer);
 
             // Print new messages, continue checking status of remote peer
-//            peer.printMessage();
+            peer.printMessage();
             String message = peer.readMessage();
             String[] messageTokens = message.split(" ");
             String function = messageTokens[0];
-            System.out.println("Mesasge sent by server is : "+ message);
-            System.out.println("Function called by message : "+ function );
-            if(function.equals("update")){
-            } else if(function.equals("step")){
+            System.out.println("Function called by message : " + function + "_");
+            if (function.equals("update")) {
+            } else if (function.equals("step")) {
                 ArrayList<CostMap> costs = Project2.server.getCosts();
-                for(CostMap cost: costs){
-                    if(cost.getNeighborId() == Integer.parseInt(messageTokens[2])){
+                for (CostMap cost : costs) {
+                    if (cost.getNeighborId() == Integer.parseInt(messageTokens[2])) {
                         cost.setCost(messageTokens[1]);
                     }
                 }
                 Project2.server.setCosts(costs);
 
-            } else if(function.equals("disable")) {
+            } else if (function.equals("disable")) {
 
 
             } else {
@@ -199,31 +198,25 @@ public class functions {
         ArrayList<IpPortMap> neighborIpAndPorts = server.getIpsAndPorts();
 
 
-        for(IpPortMap ipPortMap : neighborIpAndPorts){
+        for (IpPortMap ipPortMap : neighborIpAndPorts) {
             ipPortMap.print();
         }
 
         for (Peer peer : peerList) {
             String peerListInetIp = peer.socket.getInetAddress().toString();
             for (IpPortMap ipPortMap : neighborIpAndPorts) {
-                System.out.println(peerListInetIp.replace("/","") + " " + ipPortMap.getIp() +" ");
+                System.out.println(peerListInetIp.replace("/", "") + " " + ipPortMap.getIp() + " ");
                 // if the ip of the connection is eqaul to an ip of another ip in the topology list, then send a message
                 // to it about its cost
 
-                if (peerListInetIp.replace("/","").equals(ipPortMap.getIp())) {
+                if (peerListInetIp.replace("/", "").equals(ipPortMap.getIp())) {
                     int neighborId = ipPortMap.getServerId();
                     CostMap currentCostMap = server.getCostMapByServerID2(neighborId);
                     String message = "step";
                     message = message + " " + currentCostMap.cost;
-                    message = message +" " + Integer.toString(currentCostMap.getId());
-                    try{
-                        System.out.println("Messaage to be sent: "+message);
-                        peer.sendMessage(message);
-                        System.out.println("Cost sent to Server" + peer.getId() + "\n");
-                    } catch (Exception e){
-                        System.out.println("Cost not sent to Server" +peer.getId() +"\n");
-                        e.printStackTrace();
-                    }
+                    message = message + " " + Integer.toString(currentCostMap.getId());
+                    System.out.println("Messaage to be sent: " + message);
+                    peer.sendMessage(message);
                 }
             }
         }
@@ -246,20 +239,20 @@ public class functions {
             costMapList.set(j, temp);
         }
 
-        for(int i = 0; i < costMapList.size(); i++){
+        for (int i = 0; i < costMapList.size(); i++) {
             costMapList.get(i).print();
         }
     }
 
     //Function # disable
     //TODO: Disable the link to a given server. Doing this closes the connection to a given server with server-ID.
-    public static Topology disable(Topology server, int serverID){
+    public static Topology disable(Topology server, int serverID) {
         System.out.println(server.id);
         System.out.println(serverID);
         System.out.println();
-        System.out.println(serverID != server.id );
+        System.out.println(serverID != server.id);
         System.out.println(!server.getCostMapByServerID2(serverID).cost.equals("infinite"));
-        if(serverID != server.id || !server.getCostMapByServerID2(serverID).cost.equals("infinite") ) {
+        if (serverID != server.id || !server.getCostMapByServerID2(serverID).cost.equals("infinite")) {
             for (int i = 0; i < server.costs.size(); i++) {
                 CostMap currentCostMap = server.costs.get(i);
                 if (serverID == currentCostMap.neighborId) {
