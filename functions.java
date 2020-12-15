@@ -14,6 +14,7 @@ public class functions {
 
     // Incoming connection
     public static void listening(Integer port) {
+        System.out.println("listening function ");
         try {
             // Create socket instance, await new connection
             ServerSocket ss_socket = new ServerSocket(port);
@@ -87,14 +88,14 @@ public class functions {
     public static Topology connect(String destinationIP, Integer portNumber, Topology server, int i) {
         // TODO: Check if IP address is valid
         ArrayList<IpPortMap> ipmap = server.getIpsAndPorts();
-
+        System.out.println("connection function started");
         try {
 
-                Socket socket = new Socket(destinationIP, portNumber);
-                Peer peer = new Peer(socket, portNumber);
-                System.out.println("You have connected to " + destinationIP + "\n");
-                peerList.add(peer);
-                ipmap.get(i).setConnected(true);
+            Socket socket = new Socket(destinationIP, portNumber);
+            Peer peer = new Peer(socket, portNumber);
+            System.out.println("You have connected to " + destinationIP + "\n");
+            peerList.add(peer);
+            ipmap.get(i).setConnected(true);
 
         } catch (Exception e) {
             // if ip is not connected to ...
@@ -111,6 +112,7 @@ public class functions {
                 }
             }
         }
+        System.out.println("connection function ended");
         return server;
     }
 
@@ -211,37 +213,37 @@ public class functions {
                     String message = "step";
                     message = message + " " + currentCostMap.cost;
                     message = message +" " + Integer.toString(currentCostMap.getId());
-                  try{
-                      System.out.println("Messaage to be sent: "+message);
-                      peer.sendMessage(message);
-                      System.out.println("Cost sent to Server" + peer.getId() + "\n");
-                  } catch (Exception e){
-                      System.out.println("Cost not sent to Server" +peer.getId() +"\n");
-                      e.printStackTrace();
-                  }
+                    try{
+                        System.out.println("Messaage to be sent: "+message);
+                        peer.sendMessage(message);
+                        System.out.println("Cost sent to Server" + peer.getId() + "\n");
+                    } catch (Exception e){
+                        System.out.println("Cost not sent to Server" +peer.getId() +"\n");
+                        e.printStackTrace();
+                    }
                 }
             }
         }
     }
 
-  //Function # display
-  //TODO: Display the current routing table. And the table should be displayed in a sorted order from small ID to big.
-  public static void display(ArrayList<CostMap> costMapList) {
-    int j = 0;
-    for (int i = 1; i < costMapList.size(); i++) {
-      CostMap temp = costMapList.get(i);
-      j = i;
-      while (j > 0 && temp.id < costMapList.get(j - 1).id) {
-        costMapList.set(j, costMapList.get(j - 1));
-        j--;
-      }
-      costMapList.set(j, temp);
-    }
+    //Function # display
+    //TODO: Display the current routing table. And the table should be displayed in a sorted order from small ID to big.
+    public static void display(ArrayList<CostMap> costMapList) {
+        int j = 0;
+        for (int i = 1; i < costMapList.size(); i++) {
+            CostMap temp = costMapList.get(i);
+            j = i;
+            while (j > 0 && temp.id < costMapList.get(j - 1).id) {
+                costMapList.set(j, costMapList.get(j - 1));
+                j--;
+            }
+            costMapList.set(j, temp);
+        }
 
-    for(int i = 0; i < costMapList.size(); i++){
-      costMapList.get(i).print();
+        for(int i = 0; i < costMapList.size(); i++){
+            costMapList.get(i).print();
+        }
     }
-  }
 
     //Function # disable
     //TODO: Disable the link to a given server. Doing this closes the connection to a given server with server-ID.
