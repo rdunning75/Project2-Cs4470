@@ -74,6 +74,7 @@ class Peer extends Object {
 			throw new IOException();
 		} catch (IOException ex) {
 			System.out.println("Connection with " + this.socket.getInetAddress() + " closed.\n");
+			ex.printStackTrace();
 		}
 	}
 
@@ -93,6 +94,7 @@ class Peer extends Object {
 			throw new IOException();
 		} catch (IOException ex) {
 			System.out.println("Connection with " + this.socket.getInetAddress() + " closed.\n");
+			ex.printStackTrace();
 		}
 		return messageReturn.toString();
 	}
