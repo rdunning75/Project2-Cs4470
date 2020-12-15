@@ -195,7 +195,7 @@ public class functions {
     }
 
     public static void step(Topology server) throws IOException {
-
+        System.out.println("Step started");
         ArrayList<IpPortMap> neighborIpAndPorts = server.getIpsAndPorts();
 
 
@@ -224,6 +224,9 @@ public class functions {
                 }
             }
         }
+
+        System.out.println("Step ended");
+
     }
 
     //Function # display
