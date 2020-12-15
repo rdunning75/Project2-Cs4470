@@ -14,8 +14,8 @@ public class Project2 {
     public static int numberofpacketsRecieved = 0;
 
     public static int NUMOFSERVER = 2;
-//    public static int SERVERID = 1;
-      public static int SERVERID = 2;
+    public static int SERVERID = 1;
+    //    public static int SERVERID = 2;
 //    public static int SERVERID = 3;
 //    public static int SERVERID = 4;
     public static Topology server = new Topology(SERVERID, NUMOFSERVER);
@@ -98,7 +98,7 @@ public class Project2 {
                 }
             });
 
-
+            listen.start();
 
             final Topology[] finalServer = {server};
 
@@ -112,13 +112,18 @@ public class Project2 {
                     try {
 
                         ArrayList<IpPortMap> ipmap = finalServer[0].getIpsAndPorts();
-                        for (int i = 0; i < ipmap.size(); i++) {
-                            if (ipmap.get(i).getServerId() != SERVERID) {
-                                System.out.println(ipmap.get(i).isConnected());
-                                if (!ipmap.get(i).isConnected()) {
-                                    finalServer[0] = functions.connect(ipmap.get(i).getIp(), Integer.parseInt(ipmap.get(i).getPort()), finalServer[0], i);
+
+
+
+                        int i = 0;
+                        for (IpPortMap ipPortMap : ipmap) {
+                            if (ipPortMap.getServerId() != SERVERID) {
+                                System.out.println("Sever with ip "+ ipPortMap.getIp() +" and server Id "+ ipPortMap.getServerId() + "is connected? "+ipPortMap.isConnected());
+                                if (!ipPortMap.isConnected()) {
+                                    finalServer[0] = functions.connect(ipPortMap.getIp(), Integer.parseInt(ipPortMap.getPort()), finalServer[0],i );
                                 }
                             }
+                            i++;
                         }
                         functions.step(finalServer[0]);
 
@@ -128,7 +133,7 @@ public class Project2 {
                 }
             }, time * 1000, time * 1000);
             server = finalServer[0];
-            listen.start();
+
         } catch (RuntimeException ex) {
             System.out.println("SAD!");
         }
