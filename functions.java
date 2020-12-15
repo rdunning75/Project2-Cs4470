@@ -206,8 +206,8 @@ public class functions {
         for (Peer peer : peerList) {
             String peerListInetIp = peer.socket.getInetAddress().toString();
             for (IpPortMap ipPortMap : neighborIpAndPorts) {
-                System.out.println(peerListInetIp + " " + ipPortMap.getIp() +" ");
-                if (peerListInetIp.equals(ipPortMap.getIp().replace("/",""))) {
+                System.out.println(peerListInetIp.replace("/","") + " " + ipPortMap.getIp() +" ");
+                if (peerListInetIp.replace("/","").equals(ipPortMap.getIp())) {
                     int neighborId = ipPortMap.getServerId();
                     CostMap currentCostMap = server.getCostMapByServerID2(neighborId);
                     String message = "step";
