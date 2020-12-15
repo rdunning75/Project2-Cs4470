@@ -14,6 +14,7 @@ public class functions {
 
     // Incoming connection
     public static void listening(Integer port) {
+        System.out.println("listening function ");
         try {
             // Create socket instance, await new connection
             ServerSocket ss_socket = new ServerSocket(port);
@@ -87,7 +88,7 @@ public class functions {
     public static Topology connect(String destinationIP, Integer portNumber, Topology server, int i) {
         // TODO: Check if IP address is valid
         ArrayList<IpPortMap> ipmap = server.getIpsAndPorts();
-
+        System.out.println("connection function started");
         try {
 
                 Socket socket = new Socket(destinationIP, portNumber);
@@ -111,6 +112,7 @@ public class functions {
                 }
             }
         }
+        System.out.println("connection function ended");
         return server;
     }
 
