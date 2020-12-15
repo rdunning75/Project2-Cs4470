@@ -50,8 +50,10 @@ class Peer extends Object {
 		try {
 			PrintWriter out = new PrintWriter(this.socket.getOutputStream(), true);
 			out.println(message);
+			System.out.println("messge sent");
 			out.close();
 		} catch (IOException e) {
+			System.err.println("Message Not sent!");
 			e.printStackTrace();
 		}
 	}
