@@ -55,7 +55,7 @@ public class functions {
             // Reopen socket for new connection
             s_socket.close();
             ss_socket.close();
-            terminate(peer.getId());
+           // terminate(peer.getId());
             listening(port);
         } catch (IOException e) {
 
@@ -207,6 +207,9 @@ public class functions {
             String peerListInetIp = peer.socket.getInetAddress().toString();
             for (IpPortMap ipPortMap : neighborIpAndPorts) {
                 System.out.println(peerListInetIp.replace("/","") + " " + ipPortMap.getIp() +" ");
+                // if the ip of the connection is eqaul to an ip of another ip in the topology list, then send a message
+                // to it about its cost
+
                 if (peerListInetIp.replace("/","").equals(ipPortMap.getIp())) {
                     int neighborId = ipPortMap.getServerId();
                     CostMap currentCostMap = server.getCostMapByServerID2(neighborId);
