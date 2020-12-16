@@ -53,6 +53,7 @@ class Peer extends Object {
 			System.out.println("messge sent");
 			out.close();
 		} catch (IOException e) {
+			System.err.println(this.id);
 			System.err.println("Message Not sent!");
 			e.printStackTrace();
 		}
