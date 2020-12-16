@@ -12,7 +12,7 @@ public class distance_vector_routing {
     public static int time;
     public static Timer timer = new Timer();
     public static int numberofpacketsRecieved = 0;
-    public static int NUMOFSERVER = 4;
+    public static int NUMOFSERVER = 2;
     public static int SERVERID = 0;
     public static Topology server = new Topology(SERVERID, NUMOFSERVER);
 
@@ -166,12 +166,18 @@ public class distance_vector_routing {
                     break;
                 case "disable":
                     try {
-                        // server = functions.disable(server, Integer.parseInt(user_command[1]));
+                         functions.disable(server, Integer.parseInt(user_command[1]));
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
                     break;
                 case "crash":
+                    try {
+                        functions.crash(server);
+                    } catch (IOException e){
+                        System.out.println("\n[!] crash COMMAND ERROR: system could not crash");
+                        System.exit(0);
+                    }
                     break;
                 default:
                     System.out.println("[!] COMMAND ERROR: " + functions.user_command(user_command) + " command not in list. Try again.");

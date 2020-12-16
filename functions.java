@@ -13,11 +13,12 @@ import java.net.InetSocketAddress;
 public class functions {
     public static ArrayList<Peer> peerList = new ArrayList<>();
     public static Topology server = new Topology(0, 0);
+    public static ServerSocket ss_socket;
 
     // Incoming connection
     public static void listening(int port) {
         try {
-            ServerSocket ss_socket = new ServerSocket(port);
+            ss_socket = new ServerSocket(port);
             distance_vector_routing.numberofpacketsRecieved++;
 
             while (true) {
@@ -228,16 +229,18 @@ public class functions {
 
     }
 
-    // public static void crash (Topology server) throws IOException {
-    //     for (int i = 0; i < ipmap.size(); i++) {
-    //         if (ipmap.get(i).getServerId() != server.getId()) {
+     public static void crash (Topology server) throws IOException {
+         for (IpPortMap ipPortMap : server.getIpsAndPorts()) {
+             if (ipPortMap.getServerId() != server.getId()) {
 
-    //             if (!ipmap.get(i).isConnected()) {
-    //                 server = functions.connect(ipmap.get(i).getIp(), Integer.parseInt(ipmap.get(i).getPort()), server, i, "disconnect");
-    //             } else {
+                 if (!ipPortMap.isConnected()) {
+                     ipPortMap.setConnected(false);
+                 } else {
+                 }
 
-    //             }
-    //         }
-    //     }
-    // }
+                 functions.ss_socket.close();
+                 System.out.println("crash COMMAND SUCCESS: server crashed");
+             }
+         }
+     }
 }
