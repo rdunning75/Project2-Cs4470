@@ -201,28 +201,20 @@ public class functions {
         }
     }
 
-     public static Topology disable(Topology server, int serverID){
-         System.out.println(server.id);
-         System.out.println(serverID);
-         System.out.println();
-         System.out.println(serverID != server.id );
-         System.out.println(!server.getCostMapByServerID2(serverID).cost.equals("infinite"));
-         if(serverID != server.id || !server.getCostMapByServerID2(serverID).cost.equals("infinite") ) {
-             for (int i = 0; i < server.costs.size(); i++) {
-                 CostMap currentCostMap = server.costs.get(i);
-                 if (serverID == currentCostMap.neighborId) {
-                     server.costs.get(i).setCost("infinite");
-
-                     //
-
-                     System.out.println("Disabled connection with server " + server.ipsAndPorts.get(i).serverId + "(" + server.ipsAndPorts.get(i).ip + ")");
-                 }
-             }
+     public static void disable(Topology server, int serverID){
+         if(serverID != server.id && !server.getCostMapByServerID2(serverID).cost.equals("infinite")){ 	  	
+         server.getCostMapByServerID2(serverID).cost = "infinite";
+         System.out.println("[!] disable COMMAND SUCCESS: \'Disabled\' connection with server " +serverID);
+         try {
+         	functions.step(server);
+         	}
+         catch (IOException e){
+         	
+         }    
          } else {
-             System.out.println("You can only disable connection with your neighbor!!");
+             System.out.println("[!] disable COMMAND ERROR: You can only disable connection with your neighbor!");
          }
 
-         return server;
      }
 
     public static String user_command(String[] user_input) {
