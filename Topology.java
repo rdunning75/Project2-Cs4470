@@ -82,7 +82,9 @@ public class Topology {
 
     public void setCostMapByServerID2(int serverID2, String newCost){
         for(CostMap c : costs){
-            c.setCost(newCost);
+            if(serverID2 == c.neighborId) {
+                c.setCost(newCost);
+            }
         }
     }
 
