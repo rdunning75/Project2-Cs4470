@@ -206,7 +206,7 @@ public class functions {
                 // if the ip of the connection is eqaul to an ip of another ip in the topology list, then send a message
                 // to it about its cost
 
-                if (peerListInetIp.replace("/", "").equals(ipPortMap.getIp())) {
+                if (peerListInetIp.replace("/", "").equals(ipPortMap.getIp()) && !peer.port.equals(Project2.port)) {
                     int neighborId = ipPortMap.getServerId();
                     CostMap currentCostMap = server.getCostMapByServerID2(neighborId);
                     String message = "step";
