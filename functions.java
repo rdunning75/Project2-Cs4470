@@ -13,11 +13,10 @@ public class functions {
     public static ArrayList<Peer> peerList = new ArrayList<>();
 
     // Incoming connection
-    public static void listening(Integer port) {
+    public static void listening(ServerSocket ss_socket) {
         System.out.println("listening function ");
         try {
             // Create socket instance, await new connection
-            ServerSocket ss_socket = new ServerSocket(port);
             Socket s_socket = ss_socket.accept();
 
             Peer peer = new Peer(s_socket, s_socket.getPort());
@@ -58,8 +57,9 @@ public class functions {
 
 
             // Reopen socket for new connection
+            s_socket.close();
             ss_socket.close();
-            listening(port);
+            listening(ss_socket);
         } catch (IOException e) {
             System.err.println("error in listening function!");
             e.printStackTrace();
@@ -206,7 +206,7 @@ public class functions {
                 // if the ip of the connection is eqaul to an ip of another ip in the topology list, then send a message
                 // to it about its cost
 
-                if (peerListInetIp.replace("/", "").equals(ipPortMap.getIp()) && !peer.port.equals(Project2.port)) {
+                if (peerListInetIp.replace("/", "").equals(ipPortMap.getIp()) ) {
                     int neighborId = ipPortMap.getServerId();
                     CostMap currentCostMap = server.getCostMapByServerID2(neighborId);
                     String message = "step";

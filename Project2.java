@@ -1,6 +1,7 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.ServerSocket;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Timer;
@@ -91,10 +92,11 @@ public class Project2 {
         String[] commands = {"help", "myip", "myport", "connect", "list", "terminate", "send", "exit", "update", "step", "packets", "display", "disable", "crash"};
 
         try {
+            ServerSocket ss_socket = new ServerSocket(port);
             // Start the thread where program waits for connection
             Thread listen = new Thread(new Runnable() {
                 public void run() {
-                    functions.listening(port);
+                    functions.listening(ss_socket);
                 }
             });
 
@@ -135,7 +137,7 @@ public class Project2 {
             }, time * 1000, time * 1000);
             server = finalServer[0];
 
-        } catch (RuntimeException ex) {
+        } catch (RuntimeException | IOException ex) {
             System.out.println("SAD!");
         }
 
