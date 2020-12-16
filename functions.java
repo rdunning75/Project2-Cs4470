@@ -110,7 +110,7 @@ public class functions {
                 if (ipmap.get(i).getConnectTryCount() == 3) {
                     System.out.println("\n[!] connect COMMAND INFO: Server id tp change : " + server.id + " & " + ipmap.get(i).getServerId());
                     ipmap.get(i).setConnected(false);
-                    server = functions.update(server.id, server.id, ipmap.get(i).getServerId(), "infinite", server);
+                    server.setCostMapByServerID2(ipmap.get(i).getServerId(),"infinite");
                     ipmap.get(i).setConnectTryCount(0);
 
                     if (message.contains("update")) {
