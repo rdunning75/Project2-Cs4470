@@ -109,10 +109,10 @@ public class functions {
                 // If connection try count is = 3, set it to zero and set is connection to false
                 if (ipmap.get(i).getConnectTryCount() == 3) {
                     System.out.println("\n[!] connect COMMAND INFO: Server id tp change : " + server.id + " & " + ipmap.get(i).getServerId());
-                    functions.update(server.id, server.id, ipmap.get(i).getServerId(), "infinte", server);
-                    ipmap.get(i).setConnectTryCount(0);
                     ipmap.get(i).setConnected(false);
-                    
+                    server = functions.update(server.id, server.id, ipmap.get(i).getServerId(), "infinite", server);
+                    ipmap.get(i).setConnectTryCount(0);
+
                     if (message.contains("update")) {
                         System.out.println("\n[!] update COMMAND ERROR: Unable to update cost for server with IP " + destinationIP);
                     }   
