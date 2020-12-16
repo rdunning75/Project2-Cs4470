@@ -31,34 +31,39 @@ public class functions {
             String message = peer.readMessage();
             String[] messageTokens = message.split(" ");
             String function = messageTokens[0];
-            System.out.println("Function called by message : " + function + "_");
+            System.out.print("Function called by message: ");
 
-            if (function.equals("update")) {
-            } else if (function.equals("step")) {
-                ArrayList<CostMap> costs = Project2.server.getCosts();
-                for (CostMap cost : costs) {
-                    if (cost.getNeighborId() == Integer.parseInt(messageTokens[2])) {
-                        cost.setCost(messageTokens[1]);
+            switch (function){
+                case "update":
+                    System.out.println(" update");
+                    break;
+                case "step":
+                    System.out.println(" step");
+                    ArrayList<CostMap> costs = Project2.server.getCosts();
+                    for (CostMap cost : costs) {
+                        if (cost.getNeighborId() == Integer.parseInt(messageTokens[2])) {
+                            cost.setCost(messageTokens[1]);
+                        }
                     }
-                }
-                Project2.server.setCosts(costs);
-
-            } else if (function.equals("disable")) {
-
-
-            } else {
-                peer.printMessage();
+                    Project2.numberofpacketsRecieved++;
+                    Project2.server.setCosts(costs);
+                    break;
+                case "disable":
+                    System.out.println(" disable");
+                    break;
+                default:
+                    peer.printMessage();
             }
 
-            Project2.numberofpacketsRecieved++;
+
 
             // Reopen socket for new connection
             s_socket.close();
             ss_socket.close();
-            terminate(peer.getId());
             listening(port);
         } catch (IOException e) {
-
+            System.err.println("error in listening function!");
+            e.printStackTrace();
         }
     }
 
@@ -70,6 +75,7 @@ public class functions {
                 System.out.println(helpline);
             }
         } catch (IOException e) {
+
             e.printStackTrace();
         }
     }
@@ -179,14 +185,6 @@ public class functions {
             CostMap currentCost = server.getCostMapByServerID2(serverID2);
             if (!currentCost.getCost().equals("null")) {
                 server.setCostMapByServerID2(serverID2, newCost);
-//                for(Peer peer : peerList){
-//                    for(int i =0; i <server.getIpsAndPorts().size(); i++) {
-//                        if (peer.getIp().equals(server.getIpsAndPorts().get(i).ip)) {
-//                                    String message = "update " + serverID1 + " " + serverID2 + " " +newCost;
-//                                    peer.sendMessage(message);
-//                        }
-//                    }
-//                }
             }
         } else {
             System.out.println("You may only update your connection costs with you onw neighbors");
