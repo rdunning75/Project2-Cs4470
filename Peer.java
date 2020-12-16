@@ -84,14 +84,10 @@ class Peer extends Object {
 			// Get data from input stream
 			BufferedReader reader = new BufferedReader(new InputStreamReader(this.socket.getInputStream()));
 			String response;
-
-
 			// Checks to see if there is any input from remote peer
 			while ((response = reader.readLine()) != null) {
 				messageReturn.append(response);
 			}
-
-			throw new IOException();
 		} catch (IOException ex) {
 			System.out.println("Connection with " + this.socket.getInetAddress() + " closed.\n");
 			ex.printStackTrace();

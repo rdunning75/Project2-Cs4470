@@ -128,6 +128,7 @@ public class Project2 {
                         functions.step(finalServer[0]);
 
                     } catch (IOException e) {
+                        System.err.println("error thrown by step function");
                         e.printStackTrace();
                     }
                 }
