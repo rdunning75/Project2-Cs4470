@@ -58,7 +58,6 @@ public class functions {
 
 
             // Reopen socket for new connection
-            s_socket.close();
             ss_socket.close();
             listening(port);
         } catch (IOException e) {

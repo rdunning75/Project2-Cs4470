@@ -90,7 +90,7 @@ class Peer extends Object {
 			while ((response = reader.readLine()) != null) {
 				messageReturn.append(response);
 			}
-			
+
 		} catch (IOException ex) {
 			System.out.println("Connection with " + this.socket.getInetAddress() + " closed.\n");
 			ex.printStackTrace();
