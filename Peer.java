@@ -53,6 +53,7 @@ class Peer extends Object {
 			System.out.println("messge sent");
 			out.close();
 		} catch (IOException e) {
+			System.err.println(this.id);
 			System.err.println("Message Not sent!");
 			e.printStackTrace();
 		}
@@ -84,13 +85,10 @@ class Peer extends Object {
 			// Get data from input stream
 			BufferedReader reader = new BufferedReader(new InputStreamReader(this.socket.getInputStream()));
 			String response;
-
-
 			// Checks to see if there is any input from remote peer
 			while ((response = reader.readLine()) != null) {
 				messageReturn.append(response);
 			}
-
 		} catch (IOException ex) {
 			System.out.println("Connection with " + this.socket.getInetAddress() + " closed.\n");
 			ex.printStackTrace();
