@@ -1,0 +1,49 @@
+CS4470
+Project #2, Distance Vector Routing Protocols
+
+These shell commands are defined internally. Type `help' to see this list.
+
+/help
+	- Display the command manual or user interface options
+ 
+/server -t <topology-file-name> -i <routing-update-interval>
+	- Command must be run when initiating the program. Indicates initial topology configuration.
+
+/update <server-ID1> <server-ID2> <link-cost> 
+	- Specifies new link cost between the source and destination server. 
+	- Command is issued to both servers.
+	- Servers involved update the cost to themselves and no other server.
+
+/step
+	- Sends routing update to neighbors right away.
+
+/packets
+	- Display the number of distance vector (packets).
+ 
+/display
+	- Display current routing table. 
+	- Table will be displayed in sorted order from small ID to big.
+	- Displayed with format: <source-server-ID> <next-hop-server-ID> <cost-of-path>
+
+/disable <server-ID>
+	- Disable the link to a given server.
+	- Closes the connection to a given server with server-ID.
+
+/crash
+	- Closes all connections on all links.
+	- Neighboring servers will update link to show cost of infinity.
+
+
+Server may respond in custom messages or general format messages such as:
+
+<command-string> SUCCESS
+	- Successful execution of commands such as update, step, packets, display, or disable
+
+<command-string> <error-message>
+	- Error during execution of commands such as update, step, packets, display, or disable
+	- error-message is a brief description of what occured
+
+RECEIVED A MESSAGE FROM SERVER <server-ID>
+	- server-ID is ID of server which sent a route update message to local server
+	- Only recieved during successful route update message from neighbor
+	
